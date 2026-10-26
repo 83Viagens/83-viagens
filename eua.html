@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assunção - 83 Viagens</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        /* --- HEADER COM MENU HAMBÚRGUER --- */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background-color: rgba(255, 255, 255, 0.9); /* Branco com 90% de opacidade */
+            backdrop-filter: blur(5px); /* Efeito de desfoque no fundo transparente */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        /* Espaço da Logo */
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #004aad;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Menu de Navegação (escondido por padrão) */
+        .nav-menu {
+            display: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #004aad;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.2s;
+        }
+
+        .nav-menu a:hover {
+            color: #002255;
+        }
+
+        /* Ícone Hambúrguer */
+        .hamburger {
+            position: absolute;
+            right: 25px;
+            font-size: 1.8rem;
+            color: #004aad;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* Classes ativadas pelo JavaScript ao clicar no menu */
+        .header.menu-active .logo {
+            display: none; /* Esconde a logo */
+        }
+        
+        .header.menu-active .nav-menu {
+            display: flex; /* Mostra os links */
+        }
+
+        /* --- SEÇÃO HERO (IMAGEM TELA TODA) --- */
+        .hero-destination {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            
+            /* Fundo com película azul escuro para leitura */
+            background-image: linear-gradient(rgba(0, 74, 173, 0.6), rgba(0, 74, 173, 0.8)), url('eua.jpg');
+            background-color: #004aad;
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat;
+            color: #ffffff;
+            margin-top: 0;
+        }
+
+        .hero-destination h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero-destination h2 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            max-width: 800px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        /* --- LISTA DE DATAS --- */
+        .dates-section {
+            padding: 80px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .dates-section h3 {
+            font-size: 2rem;
+            color: #004aad;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .dates-list {
+            list-style: none;
+        }
+
+        .date-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 20px;
+            background: #f9f9f9;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border-left: 5px solid #004aad;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            transition: transform 0.2s ease;
+        }
+
+        .date-item:hover {
+            transform: translateX(5px);
+        }
+
+        .date-info h4 {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .date-info p {
+            color: #666;
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        .btn-quero {
+            background-color: #004aad;
+            color: #ffffff;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background-color 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .btn-quero:hover {
+            background-color: #003380;
+        }
+
+        /* --- RODAPÉ (IGUAL À HOMEPAGE) --- */
+        .footer {
+            padding: 20px;
+            text-align: center;
+            background-color: #004aad;
+            color: #ffffff;
+            font-size: 0.9rem;
+            font-weight: 300;
+            margin-top: 40px;
+        }
+        
+        .footer span {
+            margin: 0 10px;
+        }
+
+        /* Responsividade para Celulares */
+        @media (max-width: 768px) {
+            .hero-destination h1 { font-size: 3rem; }
+            .hero-destination h2 { font-size: 1.1rem; }
+            .date-item { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .btn-quero { width: 100%; text-align: center; }
+            .nav-menu { gap: 15px; }
+            .nav-menu a { font-size: 0.9rem; }
+            .footer { font-size: 0.8rem; padding: 15px 10px; }
+            .footer span { display: block; margin: 5px 0; }
+            .footer .separator { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER COM MENU DINÂMICO -->
+    <header class="header" id="main-header">
+        <!-- Logo -->
+         <a href="index.html" class="logo">
+       <img src="logo-83viagens.png" alt="Logo 83 Viagens" class="logo" style="height: 45px; width: auto;">
+        </a>
+        <!-- Menu que aparece ao clicar -->
+        <nav class="nav-menu">
+            <a href="index.html">Home</a>
+            <a href="index.html#pacotes">Pacotes</a>
+            <a href="https://wa.me/5583993162533?text=Olá, vim pelo site. Gostaria de planejar minha próxima viagem">Contato</a>
+        </nav>
+        
+        <!-- Ícone Hambúrguer (O código &#9776; gera o ícone de 3 riscos) -->
+        <div class="hamburger" id="menu-btn">&#9776;</div>
+    </header>
+
+    <!-- TELA CHEIA DO DESTINO -->
+    <section class="hero-destination">
+        <h1>Assunção</h1>
+        <h2>A nova suíça, está lhe esperando com braços abertos, aproveite que chegando por via aérea a cota de importação são de US$ 1.000.</h2>
+    </section>
+
+    <!-- LISTA DE DATAS -->
+    <section class="dates-section">
+        <h3>Datas Disponíveis</h3>
+        <ul class="dates-list">
+            
+            <li class="date-item">
+                <div class="date-info">
+                    <h4>12 a 18 de Novembro de 2026</h4>
+                    <p>Voo direto + Hospedagem 4 estrelas com café da manhã</p>
+                </div>
+                <a href="#" class="btn-quero">Quero esse!</a>
+            </li>
+
+            <li class="date-item">
+                <div class="date-info">
+                    <h4>05 a 11 de Dezembro de 2026</h4>
+                    <p>Voo direto + Hospedagem 4 estrelas + Transfer incluso</p>
+                </div>
+                <a href="#" class="btn-quero">Quero esse!</a>
+            </li>
+
+            <li class="date-item">
+                <div class="date-info">
+                    <h4>15 a 22 de Janeiro de 2027</h4>
+                    <p>Pacote Férias: Voo + Resort all-inclusive</p>
+                </div>
+                <a href="#" class="btn-quero">Quero esse!</a>
+            </li>
+
+        </ul>
+    </section>
+
+    <!-- RODAPÉ -->
+    <footer class="footer">
+        <span>83 VIAGENS</span> <span class="separator">|</span>
+        <span>CNPJ: 68.609.278/0001-02</span> <span class="separator">|</span>
+        <span>(83) 99316-2533</span>
+    </footer>
+
+    <!-- SCRIPT PARA FUNCIONAMENTO DO MENU -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const header = document.getElementById('main-header');
+
+        menuBtn.addEventListener('click', function() {
+            // Adiciona ou remove a classe 'menu-active' no cabeçalho
+            header.classList.toggle('menu-active');
+            
+            // Troca o ícone de hambúrguer para o "X" de fechar
+            if(header.classList.contains('menu-active')) {
+                menuBtn.innerHTML = '&times;'; // Símbolo de "X"
+            } else {
+                menuBtn.innerHTML = '&#9776;'; // Símbolo de hambúrguer
+            }
+        });
+    </script>
+
+</body>
+</html>
