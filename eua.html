@@ -211,6 +211,59 @@
             .footer span { display: block; margin: 5px 0; }
             .footer .separator { display: none; }
         }
+
+        .btn-discreto {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 10px 30px;
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Borda fina e semi-transparente */
+    border-radius: 50px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 300;
+    transition: all 0.3s ease;
+    background-color: transparent;
+}
+
+.btn-discreto:hover {
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo levemente visível ao passar o mouse */
+    border-color: #ffffff;
+}
+
+.scroll-down-btn {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.scroll-down-btn:hover {
+    opacity: 1;
+}
+/* Setinha animada */
+.scroll-down-btn::after {
+    content: '↓';
+    font-size: 1.5rem;
+    margin-top: 5px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
     </style>
 </head>
 <body>
@@ -225,7 +278,7 @@
         <nav class="nav-menu">
             <a href="index.html">Home</a>
             <a href="index.html#pacotes">Pacotes</a>
-            <a href="https://wa.me/5583993162533?text=Olá, vim pelo site. Gostaria de planejar minha próxima viagem">Contato</a>
+            <a href="https://wa.me/5583993162533?text=Olá, vim pelo site. Gostaria de planejar minha próxima viagem" target="_blank">Contato</a>
         </nav>
         
         <!-- Ícone Hambúrguer (O código &#9776; gera o ícone de 3 riscos) -->
@@ -236,10 +289,12 @@
     <section class="hero-destination">
         <h1>Assunção</h1>
         <h2>A nova suíça, está lhe esperando com braços abertos, aproveite que chegando por via aérea a cota de importação são de US$ 1.000.</h2>
+        <a href="#datas" class="scroll-down-btn">DATAS DISPONÍVEIS</a>
+        <a href="sobre-assuncao.html" class="btn-discreto">Conheça o destino</a>
     </section>
 
     <!-- LISTA DE DATAS -->
-    <section class="dates-section">
+    <section id="datas"class="dates-section">
         <h3>Datas Disponíveis</h3>
         <ul class="dates-list">
             
@@ -294,6 +349,33 @@
             }
         });
     </script>
+<script>
+        // 1. Coloque o número do WhatsApp da 83 Viagens aqui (Apenas números: País + DDD + Número)
+        const numeroWhatsApp = '5583999999999'; 
 
+        // 2. Seleciona todos os botões "Quero esse!" da página
+        const botoesQuero = document.querySelectorAll('.btn-quero');
+
+        botoesQuero.forEach(botao => {
+            // Encontra a "caixa" (date-item) onde este botão específico está
+            const itemLista = botao.closest('.date-item');
+            
+            if (itemLista) {
+                // Captura o texto da data (h4) e do pacote (p)
+                const dataViagem = itemLista.querySelector('h4').innerText;
+                const pacoteViagem = itemLista.querySelector('p').innerText;
+                
+                // Monta a frase que o cliente vai enviar
+                const mensagem = `Olá, tenho interesse no pacote de ${dataViagem} / ${pacoteViagem}`;
+                
+                // Transforma a frase em um link válido (troca espaços por %20, etc.)
+                const textoCodificado = encodeURIComponent(mensagem);
+                
+                // Aplica o link gerado no botão e força a abrir em uma nova aba
+                botao.href = `https://wa.me/${numeroWhatsApp}?text=${textoCodificado}`;
+                botao.target = '_blank';
+            }
+        });
+    </script>
 </body>
 </html>
