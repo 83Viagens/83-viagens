@@ -6,7 +6,7 @@
     <title>83 Viagens</title>
     <style>
         /* Importando a fonte Montserrat */
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
 
         * {
             margin: 0;
@@ -33,7 +33,7 @@
             position: relative; /* Necessário para posicionar o botão animado no fundo */
             
             /* Fundo com imagem e película azul */
-            background-image: linear-gradient(rgba(0, 74, 173, 0.2), rgba(0, 74, 173, 0.2)), url('fundo.jpeg');
+            background-image: linear-gradient(rgba(0, 74, 173, 0.2), rgba(0, 74, 173, 0.2)), url('imagens/fundo.jpeg');
             background-color: #004aad;
             background-size: cover; 
             background-position: center; 
@@ -237,31 +237,8 @@
     <section id="pacotes" class="packages-section">
         <h2>Pacotes em Destaque</h2>
         
-        <div class="cards-container">
-            <!-- Pacote 1 -->
-            <div class="card">
-                <img src="assuncao.jpeg" alt="Pacote Praia" class="card-img">
-                <h3>Assunção</h3>
-                <p>Conheça esse destino espetacular por apenas R$ 1.399,90</p>
-                <a href="assuncao.html" class="btn-card">Ver Pacote</a>
-            </div>
-
-            <!-- Pacote 2 -->
-            <div class="card">
-                <img src="eua.jpg" alt="Pacote Praia" class="card-img">
-                <h3>Estados Unidos</h3>
-                <p>Vá para a terra da liberdade por apenas R$ 2.599,99 (até 6x sem juros)</p>
-                <a href="eua.html" class="btn-card">Ver Pacote</a>
-            </div>
-
-            <!-- Pacote 3 -->
-            <div class="card">
-                <img src="lisboa.jpg" alt="Pacote Praia" class="card-img">
-                <h3>Lisboa</h3>
-                <p>Voos direto da TAP, a partir de R$ 3,980,99 (até 10x sem juros)</p>
-                <a href="lisboa.html" class="btn-card">Ver Pacote</a>
-            </div>
-        </div>
+        <!-- Os cards são gerados automaticamente por render-pacotes.js a partir de pacotes.js -->
+        <div class="cards-container"></div>
     </section>
 
     <!-- RODAPÉ -->
@@ -271,5 +248,9 @@
         <span>(83) 99316-2533</span>
     </footer>
 
+    <!-- PACOTES: dados + renderização dos cards da home -->
+    <script src="pacotes.js"></script>
+    <script src="render-pacotes.js"></script>
+    <script>renderizarCards();</script>
 </body>
 </html>
