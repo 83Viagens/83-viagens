@@ -18,8 +18,8 @@
 //         imagem    -> caminho da imagem, a partir da raiz;
 //         descricao -> frase do card da home (com o preço);
 //         chamada   -> frase do hero da página do destino;
-//         sobre     -> OPCIONAL: nome do arquivo de artigo
-//                      (ex.: "sobre-fortaleza.html"). Preenchido,
+//         sobre     -> OPCIONAL: caminho do arquivo de artigo,
+//                      a partir da raiz (ex.: "sobre/sobre-fortaleza.html"). Preenchido,
 //                      aparece o botão "Conheça o destino";
 //         datas     -> lista de { data, detalhes }.
 //    3. Copie uma casca existente (ex.: destinos/lisboa.html),
@@ -68,7 +68,7 @@ const PACOTES = [
         imagem: "imagens/lisboa.jpg",
         descricao: "Voos diretos da TAP, a partir de R$ 3.980,99 (até 10x sem juros)",
         chamada: "A cidade das sete colinas está lhe esperando de braços abertos: voos diretos da TAP, história milenar e uma gastronomia inigualável.",
-        sobre: "sobre-lisboa.html",
+        sobre: "sobre/sobre-lisboa.html",
         datas: [
             { data: "12 a 18 de Novembro de 2026", detalhes: "Voo direto + Hospedagem 4 estrelas com café da manhã" },
             { data: "05 a 11 de Dezembro de 2026", detalhes: "Voo direto + Hospedagem 4 estrelas + Transfer incluso" },
