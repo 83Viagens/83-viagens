@@ -45,7 +45,6 @@ const PACOTES = [
         descricao: "Conheça esse destino espetacular por apenas R$ 1.399,90",
         chamada: "A nova suíça, está lhe esperando com braços abertos, aproveite que chegando por via aérea a cota de importação são de US$ 1.000.",
         datas: [
-            { data: "12 a 18 de Novembro de 2026", detalhes: "Voo direto + Hospedagem 4 estrelas com café da manhã" },
             { data: "05 a 11 de Dezembro de 2026", detalhes: "Voo direto + Hospedagem 4 estrelas + Transfer incluso" },
             { data: "15 a 22 de Janeiro de 2027", detalhes: "Pacote Férias: Voo + Resort all-inclusive" }
         ]
@@ -66,9 +65,9 @@ const PACOTES = [
         destino: "Lisboa",
         pagina: "destinos/lisboa.html",
         imagem: "imagens/lisboa.jpg",
+        sobre: "sobre/sobre-lisboa.html",
         descricao: "Voos diretos da TAP, a partir de R$ 3.980,99 (até 10x sem juros)",
         chamada: "A cidade das sete colinas está lhe esperando de braços abertos: voos diretos da TAP, história milenar e uma gastronomia inigualável.",
-        sobre: "sobre/sobre-lisboa.html",
         datas: [
             { data: "12 a 18 de Novembro de 2026", detalhes: "Voo direto + Hospedagem 4 estrelas com café da manhã" },
             { data: "05 a 11 de Dezembro de 2026", detalhes: "Voo direto + Hospedagem 4 estrelas + Transfer incluso" },
