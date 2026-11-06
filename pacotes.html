@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacotes - 83 Viagens</title>
+    <!-- Ordem importa: destino (header/menu/rodapé) → cards → específicos desta página (vem por último para estender o card com o selo) -->
+    <link rel="stylesheet" href="estilo-destino.css">
+    <link rel="stylesheet" href="estilo-cards.css">
+    <link rel="stylesheet" href="estilo-pacotes.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header" id="main-header">
+        <a href="index.html" class="logo">
+            <img src="imagens/logo-83viagens.png" alt="Logo 83 Viagens" style="height: 45px; width: auto;">
+        </a>
+        <nav class="nav-menu">
+            <a href="index.html">Home</a>
+            <a href="pacotes.html">Pacotes</a>
+            <a href="https://wa.me/5583993162533?text=Olá, vim pelo site. Gostaria de planejar minha próxima viagem" target="_blank">Contato</a>
+        </nav>
+
+        <div class="hamburger" id="menu-btn">&#9776;</div>
+    </header>
+
+    <!-- FAIXA DE TÍTULO (o margin-top compensa o header fixo) -->
+    <section class="biblioteca-hero">
+        <h1>Nossos Pacotes</h1>
+        <p>Filtre por tipo de viagem ou período e encontre a sua próxima aventura.</p>
+    </section>
+
+    <!-- BIBLIOTECA DE PACOTES COM FILTROS -->
+    <main class="biblioteca-section">
+
+        <!-- Os filtros atualizam a grade em tempo real (render-pacotes.js) -->
+        <div class="filtros">
+            <div class="filtro-grupo">
+                <label for="filtro-tipo">Tipo de viagem</label>
+                <select id="filtro-tipo">
+                    <option value="todos" selected>Todos</option>
+                    <option value="nacional">Nacional</option>
+                    <option value="internacional">Internacional</option>
+                </select>
+            </div>
+            <div class="filtro-grupo">
+                <label for="filtro-de">Viajar de</label>
+                <input type="date" id="filtro-de">
+            </div>
+            <div class="filtro-grupo">
+                <label for="filtro-ate">Até</label>
+                <input type="date" id="filtro-ate">
+            </div>
+            <button type="button" class="btn-limpar" id="limpar-filtros">&times; Limpar filtros</button>
+        </div>
+
+        <p class="contagem" id="contagem-pacotes"></p>
+
+        <!-- Os cards são gerados automaticamente por render-pacotes.js a partir de pacotes.js -->
+        <div class="cards-container"></div>
+
+        <!-- Estado vazio: nenhum pacote bate com os filtros -->
+        <div class="sem-resultados" id="sem-resultados" style="display: none;">
+            <p>Nenhum pacote encontrado com esses filtros.</p>
+            <button type="button" class="btn-limpar" id="limpar-filtros-vazio">&times; Limpar filtros</button>
+        </div>
+
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="footer">
+        <span>83 VIAGENS</span> <span class="separator">|</span>
+        <span>CNPJ: 68.609.278/0001-02</span> <span class="separator">|</span>
+        <span>(83) 99316-2533</span>
+    </footer>
+
+    <!-- PACOTES: dados + biblioteca com filtros -->
+    <script src="pacotes.js"></script>
+    <script src="render-pacotes.js"></script>
+    <script>iniciarBiblioteca();</script>
+
+    <!-- Menu hambúrguer (mesma lógica das páginas de artigo) -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const header = document.getElementById('main-header');
+
+        menuBtn.addEventListener('click', function () {
+            header.classList.toggle('menu-active');
+            if (header.classList.contains('menu-active')) {
+                menuBtn.innerHTML = '&times;';
+            } else {
+                menuBtn.innerHTML = '&#9776;';
+            }
+        });
+
+        header.addEventListener('mouseleave', function () {
+            if (header.classList.contains('menu-active')) {
+                header.classList.remove('menu-active');
+                menuBtn.innerHTML = '&#9776;';
+            }
+        });
+    </script>
+
+</body>
+</html>

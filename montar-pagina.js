@@ -48,7 +48,7 @@
             </a>
             <nav class="nav-menu">
                 <a href="../index.html">Home</a>
-                <a href="../index.html#pacotes">Pacotes</a>
+                <a href="../pacotes.html">Pacotes</a>
                 <a href="${linkContato}" target="_blank">Contato</a>
             </nav>
             <div class="hamburger" id="menu-btn">&#9776;</div>
