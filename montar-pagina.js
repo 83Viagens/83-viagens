@@ -28,10 +28,6 @@
         return;
     }
 
-    // Mensagem padrão do botão "Contato" do menu
-    const mensagemContato = encodeURIComponent('Olá, vim pelo site. Gostaria de planejar minha próxima viagem');
-    const linkContato = `https://wa.me/${NUMERO_WHATSAPP}?text=${mensagemContato}`;
-
     // O botão "Conheça o destino" só existe quando o pacote tem página "sobre"
     const botaoSobre = pacote.sobre
         ? `<a href="../${pacote.sobre}" class="btn-discreto">Conheça o destino</a>`
@@ -48,8 +44,8 @@
             </a>
             <nav class="nav-menu">
                 <a href="../index.html">Home</a>
-                <a href="../index.html#pacotes">Pacotes</a>
-                <a href="${linkContato}" target="_blank">Contato</a>
+                <a href="../pacotes.html">Pacotes</a>
+                <a href="../contato.html">Contato</a>
             </nav>
             <div class="hamburger" id="menu-btn">&#9776;</div>
         </header>

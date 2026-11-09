@@ -1,0 +1,282 @@
+/* ============================================================
+   ESTILO DA PÁGINA DE CONTATO (contato.html)
+   ------------------------------------------------------------
+   Header/menu/rodapé vêm do estilo-destino.css (carregado
+   antes deste arquivo). Aqui ficam só os elementos exclusivos:
+   faixa de título, cartão do formulário, avisos de envio e
+   o bloco alternativo de WhatsApp.
+   ============================================================ */
+
+/* Import da fonte Montserrat (precisa ser a primeira regra do arquivo) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
+
+/* --- FAIXA DE TÍTULO --- */
+.contato-hero {
+    margin-top: 70px; /* Compensa o header fixo (mesmo padrão da .biblioteca-hero) */
+    padding: 60px 20px 50px;
+    text-align: center;
+    background-image: linear-gradient(rgba(0, 74, 173, 0.85), rgba(0, 74, 173, 0.85)), url('imagens/fundo.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #ffffff;
+}
+
+.contato-hero h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.contato-hero p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* --- SEÇÃO DO FORMULÁRIO --- */
+.contato-section {
+    padding: 50px 20px 80px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.form-card {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 40px 35px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.form-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
+.form-grupo label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #004aad;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-grupo input,
+.form-grupo textarea {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    color: #333;
+    background: #ffffff;
+    border: 1px solid #ccd5e0;
+    border-radius: 8px;
+    padding: 12px 14px;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.form-grupo textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+.form-grupo input:focus,
+.form-grupo textarea:focus {
+    border-color: #004aad;
+}
+
+/* Checkbox do consentimento (LGPD) */
+.form-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 5px 0 25px;
+}
+
+.form-check input {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    accent-color: #004aad;
+}
+
+.form-check label {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Botão de envio */
+.btn-enviar {
+    display: block;
+    width: 100%;
+    background-color: #004aad;
+    color: #ffffff;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-enviar:hover {
+    background-color: #003380;
+}
+
+.btn-enviar:disabled {
+    opacity: 0.7;
+    cursor: wait;
+}
+
+/* --- HONEYPOT ANTI-SPAM ---
+   Invisível para pessoas (fora da tela); robôs preenchem
+   qualquer campo que encontram e o envio deles é descartado. */
+.campo-armadilha {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+/* --- AVISOS DE ENVIO (sucesso / erro) --- */
+.aviso {
+    border-radius: 12px;
+    border-left: 5px solid;
+    padding: 20px;
+    margin-top: 25px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.aviso h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.aviso p {
+    margin-bottom: 5px;
+}
+
+.aviso-sucesso {
+    background-color: #eef7ee;
+    border-color: #2e7d32;
+    color: #1b5e20;
+}
+
+.aviso-erro {
+    background-color: #fdeeee;
+    border-color: #c62828;
+    color: #7f1d1d;
+}
+
+.aviso-erro a {
+    color: #004aad;
+    font-weight: 600;
+}
+
+/* --- PAR DE CAMPOS LADO A LADO (datas de ida/volta, adultos/crianças) --- */
+.form-par {
+    display: flex;
+    gap: 15px;
+}
+
+.form-par .form-grupo {
+    flex: 1;
+}
+
+/* --- DICA DE CAMPO (texto de ajuda sob o input) --- */
+.form-dica {
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: #666;
+    line-height: 1.4;
+}
+
+/* --- OPÇÕES DE ESCOLHA (rádios e caixas de seleção) --- */
+.form-opcoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    background: #ffffff;
+    border: 1px solid #ccd5e0;
+    border-radius: 8px;
+    padding: 12px 14px;
+}
+
+.form-opcoes label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #333;
+    cursor: pointer;
+}
+
+.form-opcoes input {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    accent-color: #004aad;
+}
+
+/* --- AVISO DE GRUPO SEM SELEÇÃO (obrigatório "pelo menos um") --- */
+.form-erro-campo {
+    display: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #c62828;
+    margin-top: 2px;
+}
+
+.form-erro-campo.ativo {
+    display: block;
+}
+
+/* --- ALTERNATIVA: WHATSAPP --- */
+.alt-whatsapp {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.alt-whatsapp p {
+    color: #555;
+    font-weight: 300;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.btn-whats {
+    display: inline-block;
+    background-color: #004aad;
+    color: #ffffff;
+    padding: 12px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+}
+
+.btn-whats:hover {
+    background-color: #003380;
+}
+
+/* Responsividade para Celulares */
+@media (max-width: 768px) {
+    .contato-hero h1 { font-size: 2rem; }
+    .contato-hero p { font-size: 1rem; }
+    .form-card { padding: 30px 20px; }
+    .form-par { flex-direction: column; gap: 0; }
+}

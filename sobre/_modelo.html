@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ============================================================
+    MODELO DE ARTIGO "SOBRE-DESTINO" — 83 VIAGENS
+    ------------------------------------------------------------
+    COMO USAR (3 passos):
+      1. Copie este arquivo e salve como  sobre/sobre-XXXX.html ;
+      2. Edite os pontos marcados com "EDITE AQUI": o <title>,
+         a imagem do banner e o texto do artigo;
+      3. Em pacotes.js, preencha o campo "sobre" do pacote
+         correspondente  (ex.: sobre: "sobre/sobre-XXXX.html")  —
+         isso faz aparecer o botão "Conheça o destino".
+
+    IMPORTANTE: não renomeie nem remova o id="topo" (do body),
+    os ids/classes dos componentes nem os scripts do final —
+    tudo já está correto e testado.
+    ============================================================ -->
+    <title>NOME DO DESTINO - 83 Viagens</title> <!-- EDITE AQUI (1): título da aba -->
+    <link rel="stylesheet" href="../estilo-artigo.css">
+</head>
+<body id="topo">
+
+    <!-- HEADER (já pronto — não precisa editar) -->
+    <header class="header" id="main-header">
+        <a href="../index.html" class="logo">
+       <img src="../imagens/logo-83viagens.png" alt="Logo 83 Viagens" style="height: 45px; width: auto;">
+        </a>
+        <nav class="nav-menu">
+            <a href="../index.html">Home</a>
+            <a href="../pacotes.html">Pacotes</a>
+            <a href="../contato.html">Contato</a>
+        </nav>
+
+        <div class="hamburger" id="menu-btn">&#9776;</div>
+    </header>
+
+    <!-- BANNER DO ARTIGO -->
+    <!-- EDITE AQUI (2a): troque SUA-IMAGEM.jpg pela foto do destino e o texto do h1 -->
+    <div class="article-hero" style="background-image: linear-gradient(rgba(0, 74, 173, 0.6), rgba(0, 74, 173, 0.6)), url('../imagens/SUA-IMAGEM.jpg')">
+        <h1>Conheça NOME DO DESTINO</h1>
+    </div>
+
+    <!-- CORPO DO ARTIGO — EDITE AQUI (2b): escreva o texto -->
+    <main class="article-content">
+        <!--
+        Blocos OPCIONAIS abaixo (o CSS já dá suporte a eles):
+        descomente para usar título grande, subtítulo e/ou autoria.
+        <div class="article-title">Título grande do artigo</div>
+        <div class="article-subtitle">Um subtítulo curto</div>
+        <div class="article-author">Por 83 Viagens</div>
+        -->
+        <div class="article-body">
+            <!-- Parágrafos de introdução: copie a tag <p> para cada parágrafo novo -->
+            <p>Escreva aqui a introdução sobre o destino: por que visitá-lo, o que o torna especial, a experiência que o viajante vai viver.</p>
+
+            <!-- Seção de assuntos/lugares: para cada item novo, copie o par h4 + p -->
+            <h3 class="topic-title">Lugares ou Assuntos do Roteiro</h3>
+
+            <h4 class="place-title">Nome do lugar ou assunto</h4>
+            <p>Descreva o lugar: o que é, por que vale a visita e uma dica prática para o viajante.</p>
+
+            <h4 class="place-title">Outro lugar</h4>
+            <p>Repita o par h4 + p para cada lugar que quiser destacar.</p>
+        </div>
+    </main>
+
+    <!-- BARRA CTA — EDITE AQUI (3): aponte para o pacote do destino -->
+    <section class="cta-bar">
+        <h2>Ficou com vontade de conhecer?</h2>
+        <p style="margin-bottom: 25px; font-weight: 300;">Confira nossos roteiros exclusivos e embarque nessa aventura.</p>
+        <a href="../destinos/SEU-DESTINO.html" class="btn-cta">Ver Pacotes para NOME DO DESTINO</a>
+    </section>
+
+    <!-- RODAPÉ (já pronto — não precisa editar) -->
+    <footer class="footer">
+        <span>83 VIAGENS</span> <span class="separator">|</span>
+        <span>CNPJ: 68.609.278/0001-02</span> <span class="separator">|</span>
+        <span>(83) 99316-2533</span>
+    </footer>
+
+    <!-- BOTÃO IR AO TOPO (já pronto; exige o id="topo" no body) -->
+    <a href="#topo" class="back-to-top" id="btn-top">Ir ao topo &uarr;</a>
+
+    <!-- SCRIPTS (já prontos — não precisa editar) -->
+    <script>
+        // Lógica do Menu Hambúrguer
+        const menuBtn = document.getElementById('menu-btn');
+        const header = document.getElementById('main-header');
+
+        menuBtn.addEventListener('click', function() {
+            header.classList.toggle('menu-active');
+            if(header.classList.contains('menu-active')) {
+                menuBtn.innerHTML = '&times;';
+            } else {
+                menuBtn.innerHTML = '&#9776;';
+            }
+        });
+
+        header.addEventListener('mouseleave', function() {
+            if (header.classList.contains('menu-active')) {
+                header.classList.remove('menu-active');
+                menuBtn.innerHTML = '&#9776;';
+            }
+        });
+
+        // Lógica do botão "Ir ao topo"
+        const btnTop = document.getElementById('btn-top');
+
+        window.addEventListener('scroll', function() {
+            // Se o usuário descer mais de 300 pixels, o botão aparece
+            if (window.scrollY > 300) {
+                btnTop.classList.add('show');
+            } else {
+                btnTop.classList.remove('show');
+            }
+        });
+    </script>
+
+</body>
+</html>

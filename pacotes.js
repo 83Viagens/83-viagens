@@ -21,20 +21,32 @@
 //         sobre     -> OPCIONAL: caminho do arquivo de artigo,
 //                      a partir da raiz (ex.: "sobre/sobre-fortaleza.html"). Preenchido,
 //                      aparece o botão "Conheça o destino";
-//         datas     -> lista de { data, detalhes }.
+//         destaque  -> true/false: se true, o pacote aparece na seção
+//                      "Pacotes em Destaque" da home. Se NENHUM pacote
+//                      estiver marcado, a home mostra todos;
+//         tipo      -> "internacional" ou "nacional" (usado pelo filtro
+//                      de tipo na página de pesquisa, pacotes.html);
+//         datas     -> lista de { data, inicio, detalhes }. "inicio" é
+//                      a data-máquina do primeiro dia da viagem
+//                      (AAAA-MM-DD, ex.: "2026-12-05"), usada pelo
+//                      filtro de período da pacotes.html; o campo
+//                      "data" é o texto que aparece no site.
 //    3. Copie uma casca existente (ex.: destinos/lisboa.html),
 //       troque o <title> e o data-destino e salve com o nome
 //       indicado no campo "pagina".
 //
 //  COMO ADICIONAR UMA DATA: inclua mais um item no array
-//  "datas" do pacote. O link de WhatsApp do botão "Quero
-//  esse!" é montado automaticamente a partir de data + detalhes.
+//  "datas" do pacote (lembre do campo "inicio" em AAAA-MM-DD,
+//  senão a data fica de fora do filtro de período da pacotes.html).
+//  O link de WhatsApp do botão "Quero esse!" é montado
+//  automaticamente a partir de data + detalhes.
 // ============================================================
 
 // Número do WhatsApp da 83 Viagens (País + DDD + Número, só dígitos).
-// Usado pelo montar-pagina.js nos botões "Quero esse!" e "Contato".
-// ATENÇÃO: o botão "Entre em contato" do hero da home (index.html)
-// tem o número escrito direto no link — trocar nos dois lugares.
+// Usado pelo montar-pagina.js nos botões "Quero esse!" das datas.
+// ATENÇÃO: o número também está escrito direto nos links de WhatsApp
+// da home (index.html) e da página de contato (contato.html) —
+// trocar nos três lugares.
 const NUMERO_WHATSAPP = '5583993162533';
 
 const PACOTES = [
@@ -42,37 +54,42 @@ const PACOTES = [
         destino: "Assunção",
         pagina: "destinos/assuncao.html",
         imagem: "imagens/assuncao.jpeg",
+        destaque: true,
+        tipo: "internacional",
         descricao: "Conheça esse destino espetacular por apenas R$ 1.399,90",
         chamada: "A nova suíça, está lhe esperando com braços abertos, aproveite que chegando por via aérea a cota de importação são de US$ 1.000.",
         datas: [
-            { data: "12 a 18 de Novembro de 2026", detalhes: "Voo direto + Hospedagem 4 estrelas com café da manhã" },
-            { data: "05 a 11 de Dezembro de 2026", detalhes: "Voo direto + Hospedagem 4 estrelas + Transfer incluso" },
-            { data: "15 a 22 de Janeiro de 2027", detalhes: "Pacote Férias: Voo + Resort all-inclusive" }
+            { data: "05 a 11 de Dezembro de 2026", inicio: "2026-12-05", detalhes: "Voo direto + Hospedagem 4 estrelas + Transfer incluso" },
+            { data: "15 a 22 de Janeiro de 2027", inicio: "2027-01-15", detalhes: "Pacote Férias: Voo + Resort all-inclusive" }
         ]
     },
     {
         destino: "Estados Unidos",
         pagina: "destinos/eua.html",
         imagem: "imagens/eua.jpg",
+        destaque: true,
+        tipo: "internacional",
         descricao: "Vá para a terra da liberdade por apenas R$ 2.599,99 (até 6x sem juros)",
         chamada: "A terra da liberdade está lhe esperando de braços abertos: cidades icônicas, parques naturais espetaculares e experiências que só os Estados Unidos podem oferecer.",
         datas: [
-            { data: "12 a 18 de Novembro de 2026", detalhes: "Voo direto + Hospedagem 4 estrelas com café da manhã" },
-            { data: "05 a 11 de Dezembro de 2026", detalhes: "Voo direto + Hospedagem 4 estrelas + Transfer incluso" },
-            { data: "15 a 22 de Janeiro de 2027", detalhes: "Pacote Férias: Voo + Resort all-inclusive" }
+            { data: "12 a 18 de Novembro de 2026", inicio: "2026-11-12", detalhes: "Voo direto + Hospedagem 4 estrelas com café da manhã" },
+            { data: "05 a 11 de Dezembro de 2026", inicio: "2026-12-05", detalhes: "Voo direto + Hospedagem 4 estrelas + Transfer incluso" },
+            { data: "15 a 22 de Janeiro de 2027", inicio: "2027-01-15", detalhes: "Pacote Férias: Voo + Resort all-inclusive" }
         ]
     },
     {
         destino: "Lisboa",
         pagina: "destinos/lisboa.html",
         imagem: "imagens/lisboa.jpg",
+        destaque: true,
+        tipo: "internacional",
+        sobre: "sobre/sobre-lisboa.html",
         descricao: "Voos diretos da TAP, a partir de R$ 3.980,99 (até 10x sem juros)",
         chamada: "A cidade das sete colinas está lhe esperando de braços abertos: voos diretos da TAP, história milenar e uma gastronomia inigualável.",
-        sobre: "sobre/sobre-lisboa.html",
         datas: [
-            { data: "12 a 18 de Novembro de 2026", detalhes: "Voo direto + Hospedagem 4 estrelas com café da manhã" },
-            { data: "05 a 11 de Dezembro de 2026", detalhes: "Voo direto + Hospedagem 4 estrelas + Transfer incluso" },
-            { data: "15 a 22 de Janeiro de 2027", detalhes: "Pacote Férias: Voo + Resort all-inclusive" }
+            { data: "12 a 18 de Novembro de 2026", inicio: "2026-11-12", detalhes: "Voo direto + Hospedagem 4 estrelas com café da manhã" },
+            { data: "05 a 11 de Dezembro de 2026", inicio: "2026-12-05", detalhes: "Voo direto + Hospedagem 4 estrelas + Transfer incluso" },
+            { data: "15 a 22 de Janeiro de 2027", inicio: "2027-01-15", detalhes: "Pacote Férias: Voo + Resort all-inclusive" }
         ]
     }
 ];
