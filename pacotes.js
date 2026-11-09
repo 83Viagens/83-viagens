@@ -67,7 +67,7 @@ const PACOTES = [
         destino: "Estados Unidos",
         pagina: "destinos/eua.html",
         imagem: "imagens/eua.jpg",
-        destaque: false,
+        destaque: true,
         tipo: "internacional",
         descricao: "Vá para a terra da liberdade por apenas R$ 2.599,99 (até 6x sem juros)",
         chamada: "A terra da liberdade está lhe esperando de braços abertos: cidades icônicas, parques naturais espetaculares e experiências que só os Estados Unidos podem oferecer.",

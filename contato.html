@@ -27,56 +27,157 @@
     <!-- FAIXA DE TÍTULO (o margin-top compensa o header fixo) -->
     <section class="contato-hero">
         <h1>Fale com a gente</h1>
-        <p>Conte como seria a viagem dos seus sonhos. Nossa equipe analisa e retorna pelo seu WhatsApp ou e-mail.</p>
+        <p>Conte como seria a viagem dos seus sonhos. Nossa equipe busca as melhores opções e retorna no seu WhatsApp.</p>
     </section>
 
     <!-- FORMULÁRIO -->
     <main class="contato-section">
 
         <!-- ============================================================
-             INTEGRAÇÃO COM O GOOGLE FORMS — COMO CONECTAR (2 passos):
-             1. No Google Forms: ⋮ (canto superior direito) → "Obter
-                link pré-preenchido" → preencha TODOS os campos com
-                "TESTE" → clique em "Obter link" e copie a URL gerada;
-             2. Troque neste arquivo:
-                - SEU_FORM_ID (no action do <form>) pelo ID que aparece
-                  na URL copiada (o trecho entre /d/e/ e /viewform);
-                - cada name="entry.ID_DO_CAMPO_*" pelo entry.XXXXXXXX
-                  correspondente (na URL pré-preenchida, a ordem dos
-                  entrys segue a ordem das perguntas do formulário).
-                - O value do checkbox de consentimento precisa ser
-                  IDÊNTICO ao texto da opção "Caixas de seleção" lá no
-                  Google Forms (a resposta chega na planilha como texto).
-             As respostas caem na planilha vinculada ao Google Forms
-             (aba "Respostas" → ícone do Sheets) e o dono do formulário
-             recebe aviso por e-mail se ativar em Respostas → ⋮.
+             INTEGRAÇÃO ATIVA COM O GOOGLE FORMS
+             ------------------------------------------------------------
+             Formulário "Contato para viagem" — ID:
+             1FAIpQLSd1znHL_W6fetkPSGwoNvo1xTuFOapHj4BKV5skDsLDqYFPGQ
+
+             Cada campo envia para a pergunta correspondente pelo
+             name="entry.ID" (o ID DE ENVIO de cada pergunta, extraído
+             dos data-params da página do formulário — NÃO confundir
+             com o ID da pergunta, que é outro número):
+
+               entry.639180094    Nome Completo (obrigatória)
+               entry.62273960     Telefone para contato (obrigatória)
+               entry.2079619332   Cidade de Origem (obrigatória)
+               entry.1928067372   Destino (obrigatória)
+               entry.1764470933   Data de IDA (obrigatória, formato AAAA-MM-DD)
+               entry.254252040    Data de VOLTA (obrigatória, formato AAAA-MM-DD)
+               entry.1599128432   Datas flexíveis? Sim/Não (obrigatória)
+               entry.831203446    Quantidade de passageiros ADULTOS (obrigatória)
+               entry.912321067    Quantidade crianças/bebês
+               entry.1982544088   Serviços do pacote (obrigatória, múltipla)
+               entry.709792121    Objetivo da viagem (múltipla)
+               entry.1106887502   Perfil de hospedagem
+               entry.2035488994   Orçamento estimado
+               entry.502740718    Informações Adicionais
+               entry.2027286710   Autorização de uso dos dados (obrigatória;
+                                  o value tem que ser exatamente "Eu autorizo")
+
+             Os inputs ocultos fvv/pageHistory/fbzx são exigidos pelo
+             endpoint do Google (sem o fbzx o POST volta HTTP 400).
+
+             REGRAS DO LADO DO GOOGLE (não mudar sem atualizar aqui):
+               - "Coletar endereços de e-mail" DESLIGADO (quebra o envio);
+               - se uma pergunta for recriada/excluída, o entry muda e o
+                 fbzx pode trocar se o formulário for editado — se o envio
+                 começar a falhar, reextraia os dois da página do formulário
+                 (fonte da página: data-params e input name="fbzx");
+               - o campo #empresa (honeypot) NÃO tem entry: ele é
+                 desabilitado antes do envio e não chega ao Google.
              ============================================================ -->
         <div class="form-card">
-            <form id="form-contato" action="https://docs.google.com/forms/d/e/SEU_FORM_ID/formResponse" method="POST">
+            <form id="form-contato" action="https://docs.google.com/forms/d/e/1FAIpQLSd1znHL_W6fetkPSGwoNvo1xTuFOapHj4BKV5skDsLDqYFPGQ/formResponse" method="POST">
+
+                <!-- Campos ocultos exigidos pelo endpoint do Google Forms -->
+                <input type="hidden" name="fvv" value="1">
+                <input type="hidden" name="pageHistory" value="0">
+                <input type="hidden" name="fbzx" value="-3949807975388285529">
 
                 <div class="form-grupo">
-                    <label for="nome">Nome</label>
-                    <input type="text" id="nome" name="entry.ID_DO_CAMPO_NOME" autocomplete="name" placeholder="Seu nome completo" required>
+                    <label for="nome">Nome Completo *</label>
+                    <input type="text" id="nome" name="entry.639180094" autocomplete="name" placeholder="Seu nome completo" required>
                 </div>
 
                 <div class="form-grupo">
-                    <label for="telefone">Telefone / WhatsApp</label>
-                    <input type="tel" id="telefone" name="entry.ID_DO_CAMPO_TELEFONE" autocomplete="tel" placeholder="(83) 99999-9999" required>
+                    <label for="telefone">Telefone para contato *</label>
+                    <input type="tel" id="telefone" name="entry.62273960" autocomplete="tel" placeholder="(83) 99999-9999" required>
                 </div>
 
                 <div class="form-grupo">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" name="entry.ID_DO_CAMPO_EMAIL" autocomplete="email" placeholder="voce@exemplo.com" required>
+                    <label for="cidade">Cidade de Origem *</label>
+                    <input type="text" id="cidade" name="entry.2079619332" autocomplete="address-level2" placeholder="Ex.: Campina Grande — PB" required>
+                    <span class="form-dica">Assim iremos personalizar a sua viagem partindo da sua cidade de origem.</span>
                 </div>
 
                 <div class="form-grupo">
-                    <label for="periodo">Período da viagem</label>
-                    <input type="text" id="periodo" name="entry.ID_DO_CAMPO_PERIODO" placeholder="Ex.: janeiro de 2027">
+                    <label for="destino">Destino *</label>
+                    <input type="text" id="destino" name="entry.1928067372" placeholder="Ex.: Lisboa, Portugal" required>
+                </div>
+
+                <div class="form-par">
+                    <div class="form-grupo">
+                        <label for="data-ida">Data de IDA (previsto) *</label>
+                        <input type="date" id="data-ida" name="entry.1764470933" required>
+                    </div>
+                    <div class="form-grupo">
+                        <label for="data-volta">Data de VOLTA (previsto) *</label>
+                        <input type="date" id="data-volta" name="entry.254252040" required>
+                    </div>
                 </div>
 
                 <div class="form-grupo">
-                    <label for="mensagem">Mensagem</label>
-                    <textarea id="mensagem" name="entry.ID_DO_CAMPO_MENSAGEM" rows="4" placeholder="Conte um pouco da viagem que você imagina: destino, número de viajantes, o que não pode faltar..."></textarea>
+                    <label>Datas flexíveis? *</label>
+                    <div class="form-opcoes">
+                        <label><input type="radio" name="entry.1599128432" value="Sim" required> Sim</label>
+                        <label><input type="radio" name="entry.1599128432" value="Não"> Não</label>
+                    </div>
+                </div>
+
+                <div class="form-par">
+                    <div class="form-grupo">
+                        <label for="adultos">Quantidade de passageiros ADULTOS *</label>
+                        <input type="number" id="adultos" name="entry.831203446" inputmode="numeric" min="1" step="1" placeholder="Ex.: 2" required>
+                    </div>
+                    <div class="form-grupo">
+                        <label for="criancas">Quantidade de passageiros crianças ou bebês</label>
+                        <input type="number" id="criancas" name="entry.912321067" inputmode="numeric" min="0" step="1" placeholder="Ex.: 1 (opcional)">
+                    </div>
+                </div>
+
+                <div class="form-grupo">
+                    <label>Quais serviços você gostaria de incluir no pacote? *</label>
+                    <div class="form-opcoes">
+                        <label><input type="checkbox" name="entry.1982544088" value="Passagem aérea"> Passagem aérea</label>
+                        <label><input type="checkbox" name="entry.1982544088" value="Hospedagem"> Hospedagem</label>
+                        <label><input type="checkbox" name="entry.1982544088" value="Aluguel de Veículos"> Aluguel de Veículos</label>
+                        <label><input type="checkbox" name="entry.1982544088" value="Transfer/Traslado"> Transfer/Traslado</label>
+                        <label><input type="checkbox" name="entry.1982544088" value="Seguro Viagem"> Seguro Viagem</label>
+                        <label><input type="checkbox" name="entry.1982544088" value="Passeios"> Passeios</label>
+                        <label><input type="checkbox" name="entry.1982544088" value="Ingressos"> Ingressos</label>
+                        <label><input type="checkbox" name="entry.1982544088" value="Bilhete de Trem na Europa"> Bilhete de Trem na Europa</label>
+                    </div>
+                    <p class="form-erro-campo" id="erro-servicos">Selecione pelo menos um serviço para o pacote.</p>
+                </div>
+
+                <div class="form-grupo">
+                    <label>Qual o objetivo da viagem?</label>
+                    <div class="form-opcoes">
+                        <label><input type="checkbox" name="entry.709792121" value="Lua de Mel/Romântica"> Lua de Mel/Romântica</label>
+                        <label><input type="checkbox" name="entry.709792121" value="Viagem em Família"> Viagem em Família</label>
+                        <label><input type="checkbox" name="entry.709792121" value="Aventura/Ecoturismo"> Aventura/Ecoturismo</label>
+                        <label><input type="checkbox" name="entry.709792121" value="Praia"> Praia</label>
+                        <label><input type="checkbox" name="entry.709792121" value="Férias/Descanso"> Férias/Descanso</label>
+                        <label><input type="checkbox" name="entry.709792121" value="Compras"> Compras</label>
+                        <label><input type="checkbox" name="entry.709792121" value="Evento/Negócios"> Evento/Negócios</label>
+                    </div>
+                </div>
+
+                <div class="form-grupo">
+                    <label>Qual o seu perfil de hospedagem?</label>
+                    <div class="form-opcoes">
+                        <label><input type="radio" name="entry.1106887502" value="Custo-Benefício/Econômico"> Custo-Benefício/Econômico</label>
+                        <label><input type="radio" name="entry.1106887502" value="Luxo/Premium"> Luxo/Premium</label>
+                        <label><input type="radio" name="entry.1106887502" value="Hotel Boutique"> Hotel Boutique</label>
+                        <label><input type="radio" name="entry.1106887502" value="Resort All-Inclusive"> Resort All-Inclusive</label>
+                    </div>
+                </div>
+
+                <div class="form-grupo">
+                    <label for="orcamento">Orçamento estimado para a viagem</label>
+                    <input type="text" id="orcamento" name="entry.2035488994" placeholder="Ex.: R$ 5.000 por pessoa">
+                </div>
+
+                <div class="form-grupo">
+                    <label for="informacoes">Informações Adicionais</label>
+                    <textarea id="informacoes" name="entry.502740718" rows="4" placeholder="Informe aqui todas as informações que você acha necessário para sua viagem acontecer"></textarea>
                 </div>
 
                 <!-- Honeypot anti-spam: campo invisível para pessoas.
@@ -88,8 +189,8 @@
                 </div>
 
                 <div class="form-check">
-                    <input type="checkbox" id="consentimento" name="entry.ID_DO_CAMPO_LGPD" value="Autorizo a 83 Viagens a usar meus dados para retornar o contato" required>
-                    <label for="consentimento">Autorizo a 83 Viagens a usar meus dados (nome, telefone e e-mail) apenas para retornar este contato.</label>
+                    <input type="checkbox" id="consentimento" name="entry.2027286710" value="Eu autorizo" required>
+                    <label for="consentimento">Autorizo a equipe da 83 Viagens a utilizar as informações deste formulário para buscar as melhores opções de pacotes para mim, autorizando o contato no meu número para apresentar os orçamentos. <strong>*</strong></label>
                 </div>
 
                 <button type="submit" class="btn-enviar" id="btn-enviar">Enviar</button>
@@ -99,7 +200,7 @@
         <!-- Avisos de envio (escondidos; o JavaScript mostra o certo) -->
         <div class="aviso aviso-sucesso" id="envio-sucesso" style="display: none;">
             <h3>Recebemos seu contato!</h3>
-            <p>Obrigado! Nossa equipe vai analisar sua mensagem e retornar em breve.</p>
+            <p>Obrigado! Nossa equipe vai buscar as melhores opções e retornar no seu WhatsApp.</p>
         </div>
         <div class="aviso aviso-erro" id="envio-erro" style="display: none;">
             <h3>Não conseguimos enviar seu contato</h3>
@@ -161,19 +262,43 @@
             const blocoSucesso = document.getElementById('envio-sucesso');
             const blocoErro = document.getElementById('envio-erro');
             const textoErro = document.getElementById('envio-erro-texto');
+            const erroServicos = document.getElementById('erro-servicos');
+            const campoServicos = 'entry.1982544088';
 
-            // Enquanto o marcador SEU_FORM_ID estiver no action, o
-            // formulário não está conectado a nenhum Google Forms
-            const formConectado = !form.action.includes('SEU_FORM_ID');
+            // Limpa a mensagem customizada da data no instante em que o
+            // usuário edita o campo — senão o navegador bloqueia o próximo
+            // envio com a mensagem antiga (a validação nativa roda antes
+            // do handler de submit)
+            document.getElementById('data-volta').addEventListener('input', function () {
+                this.setCustomValidity('');
+            });
 
             form.addEventListener('submit', function (evento) {
                 evento.preventDefault();
 
                 blocoSucesso.style.display = 'none';
                 blocoErro.style.display = 'none';
+                erroServicos.classList.remove('ativo');
 
                 // Honeypot preenchido = robô: descarta sem avisar nada
                 if (honeypot.value !== '') return;
+
+                // "Pelo menos um serviço" é obrigatório no Google Forms,
+                // mas o HTML5 não sabe validar grupo de checkbox assim
+                if (!form.querySelector('input[name="' + campoServicos + '"]:checked')) {
+                    erroServicos.classList.add('ativo');
+                    form.querySelector('input[name="' + campoServicos + '"]').focus();
+                    return;
+                }
+
+                // A data de volta não pode ser antes da de ida
+                const ida = document.getElementById('data-ida').value;
+                const volta = document.getElementById('data-volta');
+                if (ida && volta.value && volta.value < ida) {
+                    volta.setCustomValidity('A data de volta não pode ser antes da data de ida.');
+                    form.reportValidity();
+                    return;
+                }
 
                 botao.disabled = true;
                 const textoOriginal = botao.textContent;
@@ -186,14 +311,9 @@
                     body: new FormData(form)
                 })
                     .then(function () {
-                        if (!formConectado) {
-                            textoErro.textContent = 'O formulário do site ainda não está conectado ao Google Forms — falta trocar o marcador SEU_FORM_ID no action do <form> (instruções no comentário do contato.html).';
-                            blocoErro.style.display = 'block';
-                        } else {
-                            blocoSucesso.style.display = 'block';
-                            form.reset();
-                            blocoSucesso.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        }
+                        blocoSucesso.style.display = 'block';
+                        form.reset();
+                        blocoSucesso.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     })
                     .catch(function () {
                         textoErro.textContent = 'Verifique sua conexão com a internet e tente de novo — ou fale direto com a gente no WhatsApp:';
