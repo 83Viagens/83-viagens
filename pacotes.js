@@ -43,9 +43,10 @@
 // ============================================================
 
 // Número do WhatsApp da 83 Viagens (País + DDD + Número, só dígitos).
-// Usado pelo montar-pagina.js nos botões "Quero esse!" e "Contato".
-// ATENÇÃO: o botão "Entre em contato" do hero da home (index.html)
-// tem o número escrito direto no link — trocar nos dois lugares.
+// Usado pelo montar-pagina.js nos botões "Quero esse!" das datas.
+// ATENÇÃO: o número também está escrito direto nos links de WhatsApp
+// da home (index.html) e da página de contato (contato.html) —
+// trocar nos três lugares.
 const NUMERO_WHATSAPP = '5583993162533';
 
 const PACOTES = [
@@ -66,7 +67,7 @@ const PACOTES = [
         destino: "Estados Unidos",
         pagina: "destinos/eua.html",
         imagem: "imagens/eua.jpg",
-        destaque: true,
+        destaque: false,
         tipo: "internacional",
         descricao: "Vá para a terra da liberdade por apenas R$ 2.599,99 (até 6x sem juros)",
         chamada: "A terra da liberdade está lhe esperando de braços abertos: cidades icônicas, parques naturais espetaculares e experiências que só os Estados Unidos podem oferecer.",

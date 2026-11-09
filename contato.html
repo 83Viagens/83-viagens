@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - 83 Viagens</title>
+    <!-- Ordem importa: destino (header/menu/rodapé) → específicos desta página -->
+    <link rel="stylesheet" href="estilo-destino.css">
+    <link rel="stylesheet" href="estilo-contato.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header" id="main-header">
+        <a href="index.html" class="logo">
+            <img src="imagens/logo-83viagens.png" alt="Logo 83 Viagens" style="height: 45px; width: auto;">
+        </a>
+        <nav class="nav-menu">
+            <a href="index.html">Home</a>
+            <a href="pacotes.html">Pacotes</a>
+            <a href="contato.html">Contato</a>
+        </nav>
+
+        <div class="hamburger" id="menu-btn">&#9776;</div>
+    </header>
+
+    <!-- FAIXA DE TÍTULO (o margin-top compensa o header fixo) -->
+    <section class="contato-hero">
+        <h1>Fale com a gente</h1>
+        <p>Conte como seria a viagem dos seus sonhos. Nossa equipe analisa e retorna pelo seu WhatsApp ou e-mail.</p>
+    </section>
+
+    <!-- FORMULÁRIO -->
+    <main class="contato-section">
+
+        <!-- ============================================================
+             INTEGRAÇÃO COM O GOOGLE FORMS — COMO CONECTAR (2 passos):
+             1. No Google Forms: ⋮ (canto superior direito) → "Obter
+                link pré-preenchido" → preencha TODOS os campos com
+                "TESTE" → clique em "Obter link" e copie a URL gerada;
+             2. Troque neste arquivo:
+                - SEU_FORM_ID (no action do <form>) pelo ID que aparece
+                  na URL copiada (o trecho entre /d/e/ e /viewform);
+                - cada name="entry.ID_DO_CAMPO_*" pelo entry.XXXXXXXX
+                  correspondente (na URL pré-preenchida, a ordem dos
+                  entrys segue a ordem das perguntas do formulário).
+                - O value do checkbox de consentimento precisa ser
+                  IDÊNTICO ao texto da opção "Caixas de seleção" lá no
+                  Google Forms (a resposta chega na planilha como texto).
+             As respostas caem na planilha vinculada ao Google Forms
+             (aba "Respostas" → ícone do Sheets) e o dono do formulário
+             recebe aviso por e-mail se ativar em Respostas → ⋮.
+             ============================================================ -->
+        <div class="form-card">
+            <form id="form-contato" action="https://docs.google.com/forms/d/e/SEU_FORM_ID/formResponse" method="POST">
+
+                <div class="form-grupo">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" name="entry.ID_DO_CAMPO_NOME" autocomplete="name" placeholder="Seu nome completo" required>
+                </div>
+
+                <div class="form-grupo">
+                    <label for="telefone">Telefone / WhatsApp</label>
+                    <input type="tel" id="telefone" name="entry.ID_DO_CAMPO_TELEFONE" autocomplete="tel" placeholder="(83) 99999-9999" required>
+                </div>
+
+                <div class="form-grupo">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="entry.ID_DO_CAMPO_EMAIL" autocomplete="email" placeholder="voce@exemplo.com" required>
+                </div>
+
+                <div class="form-grupo">
+                    <label for="periodo">Período da viagem</label>
+                    <input type="text" id="periodo" name="entry.ID_DO_CAMPO_PERIODO" placeholder="Ex.: janeiro de 2027">
+                </div>
+
+                <div class="form-grupo">
+                    <label for="mensagem">Mensagem</label>
+                    <textarea id="mensagem" name="entry.ID_DO_CAMPO_MENSAGEM" rows="4" placeholder="Conte um pouco da viagem que você imagina: destino, número de viajantes, o que não pode faltar..."></textarea>
+                </div>
+
+                <!-- Honeypot anti-spam: campo invisível para pessoas.
+                     Robôs preenchem qualquer campo que encontram — se
+                     este vier preenchido, o envio é descartado. -->
+                <div class="campo-armadilha" aria-hidden="true">
+                    <label for="empresa">Empresa</label>
+                    <input type="text" id="empresa" name="empresa" tabindex="-1" autocomplete="off">
+                </div>
+
+                <div class="form-check">
+                    <input type="checkbox" id="consentimento" name="entry.ID_DO_CAMPO_LGPD" value="Autorizo a 83 Viagens a usar meus dados para retornar o contato" required>
+                    <label for="consentimento">Autorizo a 83 Viagens a usar meus dados (nome, telefone e e-mail) apenas para retornar este contato.</label>
+                </div>
+
+                <button type="submit" class="btn-enviar" id="btn-enviar">Enviar</button>
+            </form>
+        </div>
+
+        <!-- Avisos de envio (escondidos; o JavaScript mostra o certo) -->
+        <div class="aviso aviso-sucesso" id="envio-sucesso" style="display: none;">
+            <h3>Recebemos seu contato!</h3>
+            <p>Obrigado! Nossa equipe vai analisar sua mensagem e retornar em breve.</p>
+        </div>
+        <div class="aviso aviso-erro" id="envio-erro" style="display: none;">
+            <h3>Não conseguimos enviar seu contato</h3>
+            <p id="envio-erro-texto">Verifique sua conexão e tente de novo — ou fale direto com a gente no WhatsApp:</p>
+            <p><a href="https://wa.me/5583993162533?text=Olá, vim pelo site. Gostaria de planejar minha próxima viagem" target="_blank">Chamar no WhatsApp</a></p>
+        </div>
+
+        <!-- Alternativa para quem quer falar na hora -->
+        <div class="alt-whatsapp">
+            <p>Prefere conversar agora? A gente responde na hora.</p>
+            <a class="btn-whats" href="https://wa.me/5583993162533?text=Olá, vim pelo site. Gostaria de planejar minha próxima viagem" target="_blank">Chamar no WhatsApp</a>
+        </div>
+
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="footer">
+        <span>83 VIAGENS</span> <span class="separator">|</span>
+        <span>CNPJ: 68.609.278/0001-02</span> <span class="separator">|</span>
+        <span>(83) 99316-2533</span>
+    </footer>
+
+    <!-- Menu hambúrguer (mesma lógica das outras páginas) -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const header = document.getElementById('main-header');
+
+        menuBtn.addEventListener('click', function () {
+            header.classList.toggle('menu-active');
+            if (header.classList.contains('menu-active')) {
+                menuBtn.innerHTML = '&times;';
+            } else {
+                menuBtn.innerHTML = '&#9776;';
+            }
+        });
+
+        header.addEventListener('mouseleave', function () {
+            if (header.classList.contains('menu-active')) {
+                header.classList.remove('menu-active');
+                menuBtn.innerHTML = '&#9776;';
+            }
+        });
+    </script>
+
+    <!-- Envio do formulário para o Google Forms -->
+    <script>
+        // ============================================================
+        //  O <form> tem o action real do Google Forms (formResponse),
+        //  mas o envio é interceptado e feito via fetch em modo
+        //  "no-cors": o Google não devolve resposta legível para o
+        //  navegador, então "requisição despachada" é tratada como
+        //  sucesso — a confirmação de verdade é a linha nova na
+        //  planilha vinculada ao formulário.
+        // ============================================================
+        (function () {
+            const form = document.getElementById('form-contato');
+            const honeypot = document.getElementById('empresa');
+            const botao = document.getElementById('btn-enviar');
+            const blocoSucesso = document.getElementById('envio-sucesso');
+            const blocoErro = document.getElementById('envio-erro');
+            const textoErro = document.getElementById('envio-erro-texto');
+
+            // Enquanto o marcador SEU_FORM_ID estiver no action, o
+            // formulário não está conectado a nenhum Google Forms
+            const formConectado = !form.action.includes('SEU_FORM_ID');
+
+            form.addEventListener('submit', function (evento) {
+                evento.preventDefault();
+
+                blocoSucesso.style.display = 'none';
+                blocoErro.style.display = 'none';
+
+                // Honeypot preenchido = robô: descarta sem avisar nada
+                if (honeypot.value !== '') return;
+
+                botao.disabled = true;
+                const textoOriginal = botao.textContent;
+                botao.textContent = 'Enviando...';
+                honeypot.disabled = true; // tira o honeypot do corpo do envio
+
+                fetch(form.action, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: new FormData(form)
+                })
+                    .then(function () {
+                        if (!formConectado) {
+                            textoErro.textContent = 'O formulário do site ainda não está conectado ao Google Forms — falta trocar o marcador SEU_FORM_ID no action do <form> (instruções no comentário do contato.html).';
+                            blocoErro.style.display = 'block';
+                        } else {
+                            blocoSucesso.style.display = 'block';
+                            form.reset();
+                            blocoSucesso.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    })
+                    .catch(function () {
+                        textoErro.textContent = 'Verifique sua conexão com a internet e tente de novo — ou fale direto com a gente no WhatsApp:';
+                        blocoErro.style.display = 'block';
+                    })
+                    .finally(function () {
+                        botao.disabled = false;
+                        botao.textContent = textoOriginal;
+                        honeypot.disabled = false;
+                    });
+            });
+        })();
+    </script>
+
+</body>
+</html>
